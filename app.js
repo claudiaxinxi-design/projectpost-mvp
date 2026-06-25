@@ -11,10 +11,10 @@ const generateButton = document.querySelector("#generate-button");
 const postForm = document.querySelector("#post-form");
 const emptyOutput = document.querySelector("#empty-output");
 const generatedOutput = document.querySelector("#generated-output");
-const outputTitle = document.querySelector("#output-title");
-const outputCaption = document.querySelector("#output-caption");
+const outputPost = document.querySelector("#output-post");
 const outputHashtags = document.querySelector("#output-hashtags");
 const characterCount = document.querySelector("#character-count");
+const versionLabel = document.querySelector("#version-label");
 const specificityLabel = document.querySelector("#specificity-label");
 const regenerateButton = document.querySelector("#regenerate-button");
 const analysisTitle = document.querySelector("#analysis-title");
@@ -97,6 +97,11 @@ function buildProductCopy(profile) {
 const templateLibrary = {
   PROJECT_SHOWCASE: {
     titles: ["✨ Another Beautiful Kitchen Transformation", "✨ Another Kitchen Transformation We Love"],
+    openings: [
+      "From design to installation, we love seeing our cabinets come to life.",
+      "There’s something special about seeing the final pieces of a kitchen come together.",
+      "Another project finished—and this one turned out beautifully.",
+    ],
     captions: [
       ({ completedProjectSentence }) =>
         `From design to installation, we love seeing our cabinets come to life.\n\n${completedProjectSentence} The result feels warm, timeless, and ready for everyday life.\n\n✔ In Stock\n✔ Fast Turnaround\n✔ Contractor Pricing Available\n\nReady for your next kitchen project?\n\n📍 ${brandProfile.location}`,
@@ -107,6 +112,11 @@ const templateLibrary = {
   },
   WHITE_SHAKER: {
     titles: ["🤍 White Shaker Never Goes Out of Style", "🤍 A Classic Contractors Keep Coming Back To"],
+    openings: [
+      "Clean. Bright. Timeless.",
+      "There’s a reason White Shaker continues to be a customer favorite.",
+      "When a kitchen needs to feel fresh without following a trend, White Shaker is an easy choice.",
+    ],
     captions: [
       ({ featureSentence }) =>
         `Clean. Bright. Timeless.\n\n${featureSentence} It’s easy to design around, pairs well with nearly any countertop, and gives homeowners a look that never feels dated.\n\nWhether you’re remodeling one kitchen or building several homes, it’s a dependable choice.\n\n${brandProfile.onlineOrdering}.`,
@@ -117,6 +127,11 @@ const templateLibrary = {
   },
   TWO_TONE_KITCHEN: {
     titles: ["✨ White Shaker + Maple Shaker. The Perfect Balance.", "✨ Two Finishes That Work Better Together"],
+    openings: [
+      "Why choose one finish when you can have both?",
+      "This is how you add contrast without making a kitchen feel busy.",
+      "Bright on top, warm below—the balance just works.",
+    ],
     captions: [
       ({ featureSentence }) =>
         `Why choose one finish when you can have both?\n\n${featureSentence} The lighter upper cabinets keep the room open and bright, while the warmer base cabinets add natural contrast.\n\nIt’s easy to see why this combination is requested so often.`,
@@ -127,6 +142,11 @@ const templateLibrary = {
   },
   CONTRACTOR: {
     titles: ["Built for Contractors. Loved by Homeowners.", "Keep the Job Moving."],
+    openings: [
+      "When deadlines matter, inventory matters.",
+      "Contractors don’t need more uncertainty in the schedule.",
+      "The right cabinet supplier should make the job easier, not add another delay.",
+    ],
     captions: [
       ({ supplied, featureSentence }) =>
         `When deadlines matter, inventory matters.${supplied ? `\n\n${featureSentence}` : ""}\n\nOur contractor partners rely on us for:\n\n✔ Consistent Inventory\n✔ Fast Pickup\n✔ Reliable Lead Times\n✔ Full Kitchen Packages\n\nLet’s keep your projects moving.`,
@@ -137,6 +157,11 @@ const templateLibrary = {
   },
   DEALER: {
     titles: ["Looking for Cabinet Dealer Pricing?", "Grow Your Business with Dealer Pricing"],
+    openings: [
+      "Better pricing starts with the right partnership.",
+      "Looking for cabinet pricing built around the way professionals buy?",
+      "Give your business more room to grow with dealer-level support and access.",
+    ],
     captions: [
       ({ supplied, featureSentence }) =>
         `Join our dealer program and unlock exclusive pricing designed for contractors, remodelers, builders, and showrooms.${supplied ? `\n\n${featureSentence}` : ""}\n\nBenefits include:\n\n✔ Dealer Discounts\n✔ Priority Support\n✔ Full Product Access\n\nApply online today.`,
@@ -147,6 +172,11 @@ const templateLibrary = {
   },
   IN_STOCK: {
     titles: ["🚚 Cabinets In Stock and Ready to Go", "Need Cabinets Fast? Start Here."],
+    openings: [
+      "Need cabinets fast?",
+      "Your project shouldn’t have to wait on cabinets.",
+      "When the schedule is tight, ready-to-go inventory makes all the difference.",
+    ],
     captions: [
       ({ supplied, product }) =>
         `Need cabinets fast?\n\n${supplied ? `${product} is currently available for pickup or ordering.` : "Most of our popular cabinet collections are currently in stock and available for immediate pickup or ordering."}\n\nNo long waits.\nNo unnecessary delays.\n\nJust cabinets when you need them.`,
@@ -157,6 +187,11 @@ const templateLibrary = {
   },
   NEW_COLLECTION: {
     titles: ["Introducing Our Newest Cabinet Collection", "A New Cabinet Collection Has Arrived"],
+    openings: [
+      "Designed for modern living.",
+      "Something new just arrived.",
+      "A fresh cabinet option is ready for its first project.",
+    ],
     captions: [
       ({ product }) =>
         `Designed for modern living.\n\nMeet ${product}—a fresh cabinet option that combines contemporary style, durable construction, and practical functionality.\n\nVisit our showroom or shop online.`,
@@ -167,6 +202,11 @@ const templateLibrary = {
   },
   HOMEOWNER_INSPIRATION: {
     titles: ["Dreaming About a Kitchen Upgrade?", "Save This for Your Future Kitchen"],
+    openings: [
+      "A kitchen isn’t just where meals are made.",
+      "Thinking about what your next kitchen could look like?",
+      "Sometimes one good kitchen idea is all it takes to start planning.",
+    ],
     captions: [
       ({ supplied, featureSentence }) =>
         `A kitchen isn’t just where meals are made.\n\nIt’s where life happens.${supplied ? `\n\n${featureSentence}` : ""}\n\nWhether you’re planning a complete remodel or a simple refresh, the right cabinetry can completely transform the space.\n\nSave this for inspiration.`,
@@ -177,6 +217,11 @@ const templateLibrary = {
   },
   BEFORE_AFTER: {
     titles: ["Swipe to See the Transformation ➡️", "Before. After. Completely Transformed."],
+    openings: [
+      "What a difference cabinetry can make.",
+      "Same space. A completely different experience.",
+      "The before was functional. The after feels like home.",
+    ],
     captions: [
       ({ supplied, featureSentence }) =>
         `What a difference cabinetry can make.${supplied ? `\n\n${featureSentence}` : ""}\n\nFrom outdated to modern, this project shows how thoughtful design and quality cabinets can completely change the way a kitchen looks and works.`,
@@ -187,6 +232,11 @@ const templateLibrary = {
   },
   PROMOTION: {
     titles: ["🎉 Limited-Time Savings This Month", "Plan Ahead and Save on Your Next Kitchen"],
+    openings: [
+      "Thinking about your next kitchen project?",
+      "A little planning now can save you later.",
+      "If a kitchen project is on the calendar, this is a good time to get ahead.",
+    ],
     captions: [
       ({ supplied, product }) =>
         `Thinking about your next kitchen project?\n\nNow is the perfect time.\n\nEnjoy special pricing on ${supplied ? product : "selected cabinet collections"} while inventory lasts.\n\nDon’t wait until your project starts—plan ahead and save.`,
@@ -472,15 +522,24 @@ function loadSample() {
 function generatePost() {
   const profile = getVisualProfile();
   const template = templateLibrary[selectedTemplate];
-  const title = template.titles[variation % template.titles.length];
+  const versionCount = template.openings.length * template.captions.length;
+  const normalizedVariation = variation % versionCount;
+  const titleIndex = normalizedVariation % template.titles.length;
+  const captionIndex = normalizedVariation % template.captions.length;
+  const openingIndex = Math.floor(normalizedVariation / template.captions.length) % template.openings.length;
+  const title = template.titles[titleIndex];
   const copyContext = buildProductCopy(profile);
-  const captionWriter = template.captions[variation % template.captions.length];
+  const captionWriter = template.captions[captionIndex];
+  const baseCaption = captionWriter({ ...profile, ...copyContext });
+  const paragraphs = baseCaption.split("\n\n");
+  paragraphs[0] = template.openings[openingIndex];
+  const caption = paragraphs.join("\n\n");
 
-  outputTitle.value = title;
-  outputCaption.value = captionWriter({ ...profile, ...copyContext });
+  outputPost.value = `${title}\n\n${caption}`;
   outputHashtags.value = (
     currentPlatform === "Instagram" ? template.hashtags : template.hashtags.slice(0, 5)
   ).join(" ");
+  versionLabel.textContent = `Version ${normalizedVariation + 1} of ${versionCount}`;
 
   updateQuality();
   emptyOutput.classList.add("hidden");
@@ -493,8 +552,7 @@ function generatePost() {
 }
 
 function updateQuality() {
-  const captionLength = outputCaption.value.length;
-  characterCount.textContent = `${captionLength} characters`;
+  characterCount.textContent = `${outputPost.value.length} characters`;
   specificityLabel.textContent = templateLabels[selectedTemplate];
 }
 
@@ -594,7 +652,7 @@ platformTabs.forEach((tab) => {
   });
 });
 
-[outputCaption, outputTitle, outputHashtags].forEach((field) => {
+[outputPost, outputHashtags].forEach((field) => {
   field.addEventListener("input", updateQuality);
 });
 

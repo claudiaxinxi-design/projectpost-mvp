@@ -21,9 +21,8 @@ Then open `http://localhost:4173`.
   identify the project type, stage, location, or business details.
 - Up to eight images can be added, reordered conceptually through main-photo
   selection, and removed one at a time.
-- Version one produces an editable Instagram or Facebook draft with a more
-  controlled title, caption, hashtags, regeneration, and separate copy actions
-  for each field.
+- Version one produces an editable Instagram or Facebook draft with title and
+  caption combined into one copy-ready field, plus a separate hashtag field.
 - Image analysis first classifies the post into one of ten approved template
   types. Generation fills that template instead of freely writing new copy.
 - Users can correct the detected template without re-uploading the photos.
@@ -31,7 +30,8 @@ Then open `http://localhost:4173`.
   collection names when image recognition is uncertain. User-supplied details
   take priority over the detected product name.
 - Product details are converted into a complete sentence before entering a
-  template. Each template has approved conversational variants, so regenerate
+  template. Each template combines approved titles, conversational openings,
+  and caption structures into at least six controlled versions, so regenerate
   changes wording and sentence flow without changing the post's intent or
   inventing new claims.
 - Scheduling, accounts, analytics, carousel-specific copy and ordering,
