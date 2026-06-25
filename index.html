@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Turn project photos into a polished social post for remodeling businesses."
+    />
+    <title>ProjectPost — Photo to social post</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="ProjectPost home">
+        <span class="brand-mark" aria-hidden="true">P</span>
+        <span>ProjectPost</span>
+      </a>
+      <span class="prototype-pill">Focused MVP</span>
+    </header>
+
+    <main class="app-shell">
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">Social content for remodelers</p>
+        <h1 id="page-title">Turn project photos into posts worth publishing.</h1>
+        <p>
+          Add project photos and get a ready-to-edit Instagram or Facebook
+          post in under a minute.
+        </p>
+      </section>
+
+      <ol class="progress" aria-label="Post creation progress">
+        <li class="active" data-progress="1"><span>1</span> Photos</li>
+        <li data-progress="2"><span>2</span> Visual analysis</li>
+        <li data-progress="3"><span>3</span> Polish &amp; copy</li>
+      </ol>
+
+      <section class="workspace">
+        <div class="creator-panel">
+          <section class="step-card" id="upload-step" aria-labelledby="upload-title">
+            <div class="section-heading">
+              <div>
+                <p class="step-label">Step 1</p>
+                <h2 id="upload-title">Add project photos</h2>
+              </div>
+              <button class="text-button" id="sample-button" type="button">
+                Try a sample
+              </button>
+            </div>
+
+            <label class="dropzone" id="dropzone" for="image-input">
+              <input id="image-input" type="file" accept="image/png,image/jpeg,image/webp" multiple />
+              <span class="upload-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" role="img">
+                  <path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4" />
+                </svg>
+              </span>
+              <strong>Drop photos here or browse</strong>
+              <small>JPG, PNG, or WebP · up to 8 photos · 10 MB each</small>
+            </label>
+
+            <div class="image-preview hidden" id="image-preview">
+              <img id="preview-image" alt="Uploaded project" />
+              <div class="preview-meta">
+                <div>
+                  <strong id="file-name"></strong>
+                  <span id="image-insight">Ready to add project details</span>
+                </div>
+                <button class="icon-button" id="remove-image" type="button" aria-label="Remove selected photo">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6 6l12 12M18 6 6 18" />
+                  </svg>
+                </button>
+              </div>
+              <div class="thumbnail-strip" id="thumbnail-strip" aria-label="Uploaded project photos"></div>
+            </div>
+          </section>
+
+          <section class="step-card muted-card" id="details-step" aria-labelledby="details-title">
+            <div class="section-heading">
+              <div>
+                <p class="step-label">Step 2</p>
+                <h2 id="details-title">Let the photos do the talking</h2>
+              </div>
+              <span class="required-note">No forms required</span>
+            </div>
+
+            <form id="post-form">
+              <div class="analysis-panel" id="analysis-panel">
+                <div class="analysis-icon" aria-hidden="true">✦</div>
+                <div>
+                  <strong id="analysis-title">Add photos to begin</strong>
+                  <p id="analysis-summary">
+                    AI will read the space, materials, light, color, and overall mood.
+                  </p>
+                </div>
+              </div>
+
+              <div class="analysis-tags hidden" id="analysis-tags" aria-label="Detected visual details"></div>
+
+              <label class="template-selector" for="template-select">
+                <span>
+                  Detected template
+                  <small>Change this only if the image was classified incorrectly.</small>
+                </span>
+                <select id="template-select" disabled>
+                  <option value="PROJECT_SHOWCASE">Completed Project Showcase</option>
+                  <option value="WHITE_SHAKER">White Shaker Product</option>
+                  <option value="TWO_TONE_KITCHEN">Two-Tone Kitchen</option>
+                  <option value="CONTRACTOR">Contractor Focused</option>
+                  <option value="DEALER">Dealer Recruitment</option>
+                  <option value="IN_STOCK">Inventory / In Stock</option>
+                  <option value="NEW_COLLECTION">New Collection Launch</option>
+                  <option value="HOMEOWNER_INSPIRATION">Homeowner Inspiration</option>
+                  <option value="BEFORE_AFTER">Before &amp; After</option>
+                  <option value="PROMOTION">Seasonal Promotion</option>
+                </select>
+              </label>
+
+              <label class="optional-context" for="product-context">
+                <span>
+                  Product or project details
+                  <small>Optional</small>
+                </span>
+                <textarea
+                  id="product-context"
+                  rows="3"
+                  placeholder="Example: White Shaker uppers with a Maple Shaker island"
+                ></textarea>
+                <small>
+                  Add your exact cabinet collection name or anything the image may not show clearly.
+                </small>
+              </label>
+
+              <div class="brand-context">
+                <span>Saved brand profile</span>
+                <strong>Cabinet supplier · Houston, TX · Contractor focused</strong>
+              </div>
+
+              <button class="primary-button" id="generate-button" type="submit" disabled>
+                <span>Generate post</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5" /></svg>
+              </button>
+            </form>
+          </section>
+        </div>
+
+        <aside class="output-panel" id="output-panel" aria-live="polite">
+          <div class="empty-output" id="empty-output">
+            <div class="empty-illustration" aria-hidden="true">
+              <span></span><span></span><span></span>
+            </div>
+            <h2>Your post will appear here</h2>
+            <p>Upload project photos. The visual details become your starting point.</p>
+          </div>
+
+          <div class="generated-output hidden" id="generated-output">
+            <div class="output-heading">
+              <div>
+                <p class="step-label">Draft ready</p>
+                <h2>Polish your post</h2>
+              </div>
+              <button class="icon-button" id="regenerate-button" type="button" aria-label="Generate another version">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M20 7v5h-5M4 17v-5h5M18.5 9A7 7 0 0 0 6.3 6.3L4 9m16 6-2.3 2.7A7 7 0 0 1 5.5 15" />
+                </svg>
+              </button>
+            </div>
+
+            <div class="platform-tabs" role="tablist" aria-label="Social platform">
+              <button class="active" type="button" role="tab" aria-selected="true" data-platform="Instagram">Instagram</button>
+              <button type="button" role="tab" aria-selected="false" data-platform="Facebook">Facebook</button>
+            </div>
+
+            <div class="output-field">
+              <div class="field-heading">
+                <label for="output-title">Post title</label>
+                <button class="field-copy-button" type="button" data-copy-target="output-title">Copy title</button>
+              </div>
+              <input id="output-title" />
+            </div>
+
+            <div class="output-field">
+              <div class="field-heading">
+                <label for="output-caption">Caption</label>
+                <button class="field-copy-button" type="button" data-copy-target="output-caption">Copy caption</button>
+              </div>
+              <textarea id="output-caption" rows="10"></textarea>
+            </div>
+
+            <div class="output-field">
+              <div class="field-heading">
+                <label for="output-hashtags">Hashtags</label>
+                <button class="field-copy-button" type="button" data-copy-target="output-hashtags">Copy hashtags</button>
+              </div>
+              <textarea id="output-hashtags" rows="3"></textarea>
+            </div>
+
+            <div class="quality-row">
+              <span><i class="quality-dot"></i> Based on <strong id="specificity-label">visual details</strong></span>
+              <span id="character-count">0 characters</span>
+            </div>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <div class="toast" id="toast" role="status">Copied to clipboard</div>
+    <script src="app.js"></script>
+  </body>
+</html>
